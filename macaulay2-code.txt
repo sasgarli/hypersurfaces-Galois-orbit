@@ -1,0 +1,308 @@
+=========
+
+The following Macaulay2 code was used to generate the examples on pages 12-13 of the paper "Linear system of hypersurfaces passing through a Galois orbit" by Shamil Asgarli, Dragos Ghioca, and Zinovy Reichstein. This code is attached as a supplementary file to the ArXiv listing: https://arxiv.org/abs/2310.10361
+
+=========
+
+
+Macaulay2, version 1.22
+with packages: ConwayPolynomials, Elimination, IntegralClosure, InverseSystems,
+               Isomorphism, LLLBases, MinimalPrimes, OnlineLookup,
+               PrimaryDecomposition, ReesAlgebra, Saturation, TangentCone
+
+=========
+Case 1: (n, q, d) = (2, 3, 3)
+=========
+
+i1 : Y = (b, c, d) -> flatten(for i from 0 to d list for j from 0 to d-i list b^i*c^j);
+
+i2 : R=GF(3, Variable => u);
+
+i3 : S = R[a];
+
+i4 : g = a^(10)+a^4+a+1;
+
+i5 : factor(g)
+
+       10    4
+o5 = (a   + a  + a + 1)
+
+o5 : Expression of class Product
+
+i6 : F = S/g;
+
+i7 : Bas = matrix{for i from 0 to 9 list sub(a^i,F)};
+
+             1       10
+o7 : Matrix F  <--- F
+
+i8 : MasterFunction = (b, c, d) -> (C = Y(b, c, d); L = for i from 0 to sub((d+2)*(d+1)/2-1,ZZ) list lift(C#i, ambient F); makeCols = z -> flatten entries Bas / (v -> coefficient(v, z)); Colms = for i from 0 to #L-1 list makeCols(L#i); M = matrix(Colms); return det(M));
+
+i9 : for i from 0 to 9 do print((i, MasterFunction(a, a^i, 3)))
+(0, 0)
+(1, 0)
+(2, 0)
+(3, 0)
+(4, 0)
+(5, 0)
+(6, 0)
+(7, 0)
+(8, 1)
+(9, 1)
+
+Point found [a:a^8:1]
+
+=========
+Case 2: (n, q, d) = (2, 3, 4)
+=========
+
+i1 : Y = (b, c, d) -> flatten(for i from 0 to d list for j from 0 to d-i list b^i*c^j);
+
+i2 : R=GF(3, Variable => u);
+
+i3 : S = R[a];
+
+i4 : g = a^(15) + a^2 - 1;
+
+i5 : factor(g)
+
+       15    2
+o5 = (a   + a  - 1)
+
+o5 : Expression of class Product
+
+i6 : F = S/g;
+
+i7 : Bas = matrix{for i from 0 to 14 list sub(a^i,F)};
+
+             1       15
+o7 : Matrix F  <--- F
+
+i8 : MasterFunction = (b, c, d) -> (C = Y(b, c, d); L = for i from 0 to sub((d+2)*(d+1)/2-1,ZZ) list lift(C#i, ambient F); makeCols = z -> flatten entries Bas / (v -> coefficient(v, z)); Colms = for i from 0 to #L-1 list makeCols(L#i); M = matrix(Colms); return det(M));
+
+i9 :  for i from 0 to 14 do print((i, MasterFunction(a, a^i, 4)))
+(0, 0)
+(1, 0)
+(2, 0)
+(3, 0)
+(4, 0)
+(5, 0)
+(6, 0)
+(7, 0)
+(8, 0)
+(9, -1)
+(10, 0)
+(11, 0)
+(12, 0)
+(13, 0)
+(14, 0)
+
+Point found [a:a^9:1]
+
+=========
+Case 3: (n, q, d) = (2, 3, 5)
+=========
+
+i1 : Y = (b, c, d) -> flatten(for i from 0 to d list for j from 0 to d-i list b^i*c^j);
+
+i2 : R=GF(3, Variable => u);
+
+i3 : S = R[a];
+
+i4 : g = a^(21) + a^(16) - 1;
+
+i5 : factor(g)
+
+       21    16
+o5 = (a   + a   - 1)
+
+o5 : Expression of class Product
+
+i6 : F = S/g;
+
+i7 : Bas = matrix{for i from 0 to 20 list sub(a^i,F)};
+
+             1       21
+o7 : Matrix F  <--- F
+
+i8 : MasterFunction = (b, c, d) -> (C = Y(b, c, d); L = for i from 0 to sub((d+2)*(d+1)/2-1,ZZ) list lift(C#i, ambient F); makeCols = z -> flatten entries Bas / (v -> coefficient(v, z)); Colms = for i from 0 to #L-1 list makeCols(L#i); M = matrix(Colms); return det(M));
+
+i9 : for i from 0 to 20 do print((i, MasterFunction(a, a^i, 5)))
+(0, 0)
+(1, 0)
+(2, 0)
+(3, 0)
+(4, 0)
+(5, 0)
+(6, 0)
+(7, 0)
+(8, 0)
+(9, 0)
+(10, 0)
+(11, 0)
+(12, 0)
+(13, 0)
+(14, 0)
+(15, 0)
+(16, 0)
+(17, 0)
+(18, -1)
+(19, -1)
+(20, 0)
+
+Point found [a:a^(18):1]
+
+=========
+Case 4: (n, q, d) = (2, 4, 4)
+=========
+
+i1 : Y = (b, c, d) -> flatten(for i from 0 to d list for j from 0 to d-i list b^i*c^j);
+
+i2 : R=GF(4, Variable => u);
+
+i3 : S = R[a];
+
+i4 : g = a^(15) + a + 1;
+
+i5 : factor(g)
+
+       15
+o5 = (a   + a + 1)
+
+o5 : Expression of class Product
+
+i6 : F = S/g;
+
+i7 : Bas = matrix{for i from 0 to 14 list sub(a^i,F)};
+
+             1       15
+o7 : Matrix F  <--- F
+
+i8 : MasterFunction = (b, c, d) -> (C = Y(b, c, d); L = for i from 0 to sub((d+2)*(d+1)/2-1,ZZ) list lift(C#i, ambient F); makeCols = z -> flatten entries Bas / (v -> coefficient(v, z)); Colms = for i from 0 to #L-1 list makeCols(L#i); M = matrix(Colms); return det(M));
+
+i9 : for i from 0 to 15 do print((i, MasterFunction(a^3, a^i, 4)))
+(0, 0)
+(1, 0)
+(2, 0)
+(3, 0)
+(4, 0)
+(5, 0)
+(6, 0)
+(7, 0)
+(8, 1)
+(9, 0)
+(10, 0)
+(11, 0)
+(12, 0)
+(13, 0)
+(14, 0)
+(15, 0)
+
+Point found [a^3:a^8:1]
+
+=========
+Case 5: (n, q, d) = (2, 4, 5)
+=========
+
+i1 : Y = (b, c, d) -> flatten(for i from 0 to d list for j from 0 to d-i list b^i*c^j);
+
+i2 : R=GF(4, Variable => u);
+
+i3 : S = R[a];
+
+i4 : g = a^(21)+a^2+1;
+
+i5 : factor(g)
+
+       21    2
+o5 = (a   + a  + 1)
+
+o5 : Expression of class Product
+
+i6 : F = S/g;
+
+i7 : Bas = matrix{for i from 0 to 20 list sub(a^i,F)};
+
+             1       21
+o7 : Matrix F  <--- F
+
+i8 : MasterFunction = (b, c, d) -> (C = Y(b, c, d); L = for i from 0 to sub((d+2)*(d+1)/2-1,ZZ) list lift(C#i, ambient F); makeCols = z -> flatten entries Bas / (v -> coefficient(v, z)); Colms = for i from 0 to #L-1 list makeCols(L#i); M = matrix(Colms); return det(M));
+
+i9 : for i from 0 to 20 do print((i, MasterFunction(a^6, a^i, 5)))
+(0, 0)
+(1, 0)
+(2, 0)
+(3, 0)
+(4, 0)
+(5, 0)
+(6, 0)
+(7, 0)
+(8, 0)
+(9, 0)
+(10, 0)
+(11, 1)
+(12, 0)
+(13, 0)
+(14, 0)
+(15, 0)
+(16, 0)
+(17, 0)
+(18, 0)
+(19, 0)
+(20, 0)
+
+Point found [a^6:a^(11):1]
+
+=========
+Case 6: (n, q, d) = (2, 5, 5)
+=========
+
+i1 : Y = (b, c, d) -> flatten(for i from 0 to d list for j from 0 to d-i list b^i*c^j);
+
+i2 : R=GF(5, Variable => u);
+
+i3 : S = R[a];
+
+i4 : g = a^(21)+a^(18)+a^(14)+1;
+
+i5 : F = S/g;
+
+i6 : Bas = matrix{for i from 0 to 20 list sub(a^i,F)};
+
+             1       21
+o6 : Matrix F  <--- F
+
+i7 : MasterFunction = (b, c, d) -> (C = Y(b, c, d); L = for i from 0 to sub((d+2)*(d+1)/2-1,ZZ) list lift(C#i, ambient F); makeCols = z -> flatten entries Bas / (v -> coefficient(v, z)); Colms = for i from 0 to #L-1 list makeCols(L#i); M = matrix(Colms); return det(M));
+
+i8 : factor(g)
+
+       21    18    14
+o8 = (a   + a   + a   + 1)
+
+o8 : Expression of class Product
+
+i9 : for i from 0 to 20 do print((i, MasterFunction(a, a^i, 5)))
+(0, 0)
+(1, 0)
+(2, 0)
+(3, 0)
+(4, 0)
+(5, 0)
+(6, 0)
+(7, 0)
+(8, 0)
+(9, 2)
+(10, 0)
+(11, 0)
+(12, -1)
+(13, 0)
+(14, 2)
+(15, 1)
+(16, 1)
+(17, -1)
+(18, 2)
+(19, 0)
+(20, -2)
+
+Point found [a:a^9:1]
+
